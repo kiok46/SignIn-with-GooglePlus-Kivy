@@ -4,6 +4,10 @@ from kivy.lang import Builder
 from kivy.properties import StringProperty, ObjectProperty
 from kivymd.elevationbehavior import ElevationBehavior
 from kivymd.icon_definitions import md_icons
+from kivymd.list import ILeftBody
+from kivy.uix.image import Image
+from kivy.uix.behaviors import ButtonBehavior
+from kivy.uix.label import Label
 from kivymd.label import MDLabel
 from kivymd.list import OneLineIconListItem, ILeftBody, BaseListItem
 from kivymd.slidingpanel import SlidingPanel
@@ -11,11 +15,11 @@ from kivymd.theming import ThemableBehavior
 
 Builder.load_string('''
 #:import OneLineAvatarListItem kivymd.list.OneLineAvatarListItem
-
-<NavDrawerToolbar@Toolbar>
+#:import MDLabel kivymd.label
+<NavDrawerToolbar@Image>
     canvas:
         Color:
-            rgba: root.theme_cls.divider_color
+            rgba: root.parent.theme_cls.divider_color
         Line:
             points: self.x, self.y, self.x+self.width,self.y
 
@@ -28,15 +32,18 @@ Builder.load_string('''
         Rectangle:
             size: root.size
             pos: root.pos
-
-    NavDrawerToolbar:
-        title: root.title
-        #minmap: True
-        opposite_colors: False
-        title_theme_color: 'Secondary'
-        background_color: root.theme_cls.bg_light
-        size_hint: (1, .3)
-        elevation: 0
+    BoxLayout:
+        size_hint: (1, .4)
+        Label:
+            padding: 10, 10
+            canvas.after:
+                Color:
+                    rgba: (1, 1, 1, 1)
+                RoundedRectangle:
+                    size: (self.size[1]-dp(14), self.size[1]-dp(14))
+                    pos: (self.pos[0]+(self.size[0]-self.size[1])/2, self.pos[1]+dp(7))
+                    source: root.image_source
+                    radius: [self.size[1]-(self.size[1]/2)]
 
     ScrollView:
         do_scroll_x: False
