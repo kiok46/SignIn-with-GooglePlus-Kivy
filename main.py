@@ -21,18 +21,18 @@ BoxLayout:
     orientation: 'vertical'
     Toolbar:
         id: toolbar
-        title: 'G+ KivyMD'
+        title: 'Google+'
         background_color: app.theme_cls.primary_dark
         left_action_items: [['menu', lambda x: app.nav_drawer.toggle()]]
         right_action_items: [['more-vert', lambda x: app.nav_drawer.toggle()]]
     ScreenManager:
         id: scr_mngr
         Screen:
-            name: ''
+            name: 'Home'
 
 <GPlusNavigate>:
     title: "NavigationDrawer"
-    image_source: 'images/african-lion-951778_1280.jpg'
+    image_source: 'images/me.jpg'
     NavigationDrawerIconButton:
         icon: 'face'
         text: 'Kuldeep Singh'
@@ -69,7 +69,7 @@ class GPlusApp(App):
         return main_widget
 
     def on_resume(self):
-        pass
+        return True
 
     def on_pause(self):
         pass
